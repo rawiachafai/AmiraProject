@@ -18,11 +18,11 @@ const Tabnavigation = () => (
 <NavigationContainer>
   <Tab.Navigator initialRouteName="Home"
   
-  barStyle={{ backgroundColor: '#58AAC5' }}>
+  barStyle={{ backgroundColor: '#FFFFFF' }}>
 <Tab.Screen name="Home" component={Espacedocteur}
 options={{
   tabBarLabel: 'Accueil',
-  tabBarColor: '#A7A8A9',
+  tabBarColor: '#FFFFFF',
   tabBarIcon: ({ color }) => (
     <Icon name="home-outline" color={color} size={26} />
   ) }}
@@ -30,9 +30,9 @@ options={{
 />
 <Tab.Screen name="Notifications" component={NotificationStackScreen} 
 options={{
-    tabBarLabel: 'Notification',
+    tabBarLabel: 'Mesure',
     tabBarIcon: ({ color }) => (
-      <Icon name="bell" color={color} size={26} />
+      <Icon name="current-ac" color={color} size={26} />
     ) }}
 />
 
@@ -54,7 +54,7 @@ const NotificationStackScreen = ({navigation}) => (
 
   <NotificationStack.Navigator screenOptions={{
      headerStyle: {
-       backgroundColor: '#339DC1',
+       backgroundColor: '#49B7C1',
      },
      headerTintColor: '#fff',
      headerTitleStyle:{
@@ -62,7 +62,7 @@ const NotificationStackScreen = ({navigation}) => (
      }
 
   }}>
-    <NotificationStack.Screen name="Notification" component={Notification} />
+    <NotificationStack.Screen name="Mesure" component={Notification} />
     
   </NotificationStack.Navigator> 
   

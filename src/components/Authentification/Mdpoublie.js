@@ -7,29 +7,57 @@ import { Link } from '@react-navigation/native';
 
 
 class Mdpoublie extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+      nameValidate:false,
+      username:''
+      
+    }
+  
+  }
+  validate(text,type)
+  {      
+   let rjx=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    if (type=='username')
+    { if (rjx.test(text))
+      {
+        this.setState({
+          nameValidate:true
+        })
+      }
+      else{
+        this.setState({
+          nameValidate:false,
+        })
+      }
+    }}
   render() {
+    let rjx=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let isValid =rjx.test(this.state.value)
     return (
      
-      <KeyboardAvoidingView behavior='position'>
-        <View style={{ backgroundColor: '#E9F2FA'}}>
-                  <View style={styles.LogoView}>
-                  <Text  style={styles.LogoStyle}> COAGCARE </Text>
-
-                  </View>
-                  </View>
-      <View style={{  paddingTop: 30}}>
-      <Image source={require('../../assets/logo5.jpg')} style={styles.LogoApp} />
+      <KeyboardAvoidingView behavior='padding'style={{backgroundColor:'#FFFFFF',flex:1}}>
+     
+      <View style={{  paddingTop: 22}}>
+      <Image source={require('../../assets/logocoagc.jpg')} 
+      style={{height: 120,width: 300, left: 50}} />
       </View>
       <View style={{  paddingTop: 100 }}>
 
        <View style={styles.SectionStyle}>
        <Image source={require('../../assets/mail.png')} style={styles.ImageStyle} />
 
-          <TextInput
-
-              placeholder="E-mail"
-              underlineColorAndroid="transparent"
-          />
+       <TextInput style={[styles.input,
+          !this.state.nameValidate? styles.error:null,
+           this.state.nameValidate? styles.green:null
+           ]}
+          placeholder="E-mail"
+          onChangeText={(text)=>this.validate(text,'username')}
+         
+         />
         </View>
         <View style={styles.ButtonStyle}>
             <Button color="#49B7C1"  title="Renouvler Votre Mot De Passe" onPress={() => {}} large></Button>
@@ -82,7 +110,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     
         borderBottomWidth: 0.5,
-        borderColor: '#A7A8A9',
+        borderBottomColor: 'transparent',
         height: 40,
         borderRadius: 5 ,
         margin:17,
@@ -92,7 +120,32 @@ const styles = StyleSheet.create({
         width : 380,
         height : 50 , 
         margin :20, 
-            }
+            },
+    red: {
+         borderBottomColor: 'red'
+            },
+    green: {
+          borderBottomColor: 'green'
+            } ,
+            input: {
+              width: '90%',
+              padding: 10,
+              borderStyle: 'solid',
+              borderBottomWidth: 3,
+              borderBottomColor: 'transparent'
+            },
+            
+            green: {
+              borderBottomColor: 'green',
+              borderBottomWidth: 2,
+              height: 40,
+              borderRadius: 5 ,
+            },
+            error: {
+              borderBottomColor: 'red',
+              borderBottomWidth: 2,
+              height: 40,
+              borderRadius: 5 ,}       
         
 
     

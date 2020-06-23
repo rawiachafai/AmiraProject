@@ -4,20 +4,21 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 class Espacedocteur extends React.Component {
   render() {
 return (
-<View style={{ flex: 1 ,backgroundColor: '#FFFFFF'}}>
+<View style={{ flex:1,backgroundColor: '#FFFFFF'}}>
     <View style={{ backgroundColor: 'red', paddingTop:-10 }}>
     <View style={styles.LogoView}>
     <Text  style={styles.LogoStyle}> GOAGCARE </Text>
     </View>
     </View>
-    <View style={{ flexDirection: 'row', paddingTop: 50 }}>
-    <TouchableOpacity>
-    <Icon name="home-outline" style={styles.ImageStyle} />    
-    <Text style={{ left: 83 , margin: -50 , height: 200, fontSize: 16 , color: '#A9A9A9' }}>  Ajouter Patient </Text>
+    <View style={{ paddingTop: 50 }}>
+    <TouchableOpacity style={{marginTop:-45}}>
+    <Icon name="account-multiple-plus" color='#19A1AC'size={60} style={styles.ImageStyle} />    
+    <Text style={{ left: 249 , margin: -100 , height: 200, fontSize: 14 , color: '#A9A9A9' }}>  Ajouter Patient </Text>
     </TouchableOpacity>
+    
     <TouchableOpacity>
-    <Image source={require('../../assets/personnes.jpg')} style={styles.ImageStyle} />
-    <Text style={{ left: 65 , margin: -50 , height: 200, fontSize: 16 , color: '#A9A9A9'}}>  Liste Des Patients </Text>
+    <Icon name="account-group" color='#19A1AC'size={60} style={styles.ImageStyle} />    
+    <Text style={{ left: 245 , margin: -100 , height: 200, fontSize: 14 , color: '#A9A9A9'}}>  Liste Des Patients </Text>
     </TouchableOpacity>
     </View>
     <View>
@@ -32,11 +33,8 @@ export default Espacedocteur
 const styles = StyleSheet.create({
   ImageStyle: {
       padding: 10,
-      margin: 60,
-      height: 75,
-      width: 85,
-      resizeMode : 'stretch',
-      alignItems: 'center'
+      margin: 100,
+      left:68,
 
   },
   LogoStyle:{

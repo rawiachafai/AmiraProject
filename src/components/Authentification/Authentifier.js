@@ -3,49 +3,59 @@ import { View, TextInput, StyleSheet ,Image ,Button, Text, Linking, KeyboardAvoi
 import { Link } from '@react-navigation/native';
 
 class Authentifier extends React.Component {
-  state = {
-    email: '',
-      mdp: '',
-      emailError: '',
-      emailValidator: '',
- 
-  }
- 
-  handleMdpChange = mdp => { 
-    if (+mdp >= 0 && mdp.length <= 8) {
-    this.setState({mdp} , this.validateForm )}
-    else {
-      alert("mdp doit contenir que des nombres et du longueurs 8 ")
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+      nameValidate:false,
+      passwordValidate:false
+
     }
   }
-emailValidator(){
-    let rjx=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    let isValid =rjx.test(this.state.email)
-    
-if(this.state.email=="")
-{
-  this.setState({emailError:"email ne doit pas vide"})
-} else if(!isValid){
-  this.setState({emailError:"email doit etre de la format  email"})
-} else {
-  <Text style={{color: 'green'}}>
- { this.setState({emailValidator:" valider"})} </Text>
-}
-}
-
-
+  validate(text,type)
+  {      
+   let rjx=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+   let  num=/^[a-zA-Z]+$/
+    if (type=='username')
+    { if (rjx.test(text))
+      {
+        this.setState({
+          nameValidate:true
+        })
+      }
+      else{
+        this.setState({
+          nameValidate:false,
+        })
+      }
+    }
+    else if (type=='password')
+    {
+      if ((num.test(text)) || (this.state.password.length > 8))
+      {
+        this.setState({
+          passwordValidate: true
+        })
+      }
+      else {
+        this.setState({
+          passwordValidate: false,
+        })
+      }
+    }
+  }
   render() {
+   
+    
     return (
       
-     <KeyboardAvoidingView behavior='position'>
-        <View style={{ backgroundColor: '#E9F2FA', paddingTop:-10 }}>
-                  <View style={styles.LogoView}>
-                  <Text  style={styles.LogoStyle}> COAGCARE </Text>
-
-                  </View>
-                  </View>
-      <View style={{  paddingTop: 30}}>
-      <Image source={require('../../assets/logo5.jpg')} style={{height: 120,width: 230, left: 80}} />
+     <KeyboardAvoidingView behavior='padding'style={{backgroundColor:'#FFFFFF',flex:1}}>
+     
+      <View style={{  paddingTop: 22}}>
+      <Image source={require('../../assets/logocoagc.jpg')} 
+      style={{height: 120,width: 300, left: 50}} />
       </View>
 
     <View style={{  paddingTop: 50 }}>
@@ -53,32 +63,28 @@ if(this.state.email=="")
      <View style={styles.SectionStyle}>
        <Image source={require('../../assets/mail.png')} style={styles.ImageStyle} />
 
-               <TextInput
-                 onChangeText={(text) => { this.setState({email: text})} }
-            
-                 onBlur={()=>this.emailValidator()}
-                  placeholder={'E-mail'} />
+       <TextInput style={[styles.input,
+        !this.state.nameValidate? styles.error:null,
+        this.state.nameValidate? styles.green:null
+      ]}
+          placeholder="E-mail"
+          onChangeText={(text)=>this.validate(text,'username')}
+         
+         />
               
      </View>
-     <View style={{margin: -20}}>
-                 <Text style={{color: 'red' ,left: 50}}>{this.state. emailError} </Text>
-                  <Text style={{color: 'green',left: 50}}>
-                  {this.state. emailValidator} </Text>
-      </View>
+  
      <View style={styles.SectionStyle}>
             <Image source={require('../../assets/p1.png')} style={styles.ImageStyle} />
-
-                    <TextInput
-                        style={{flex:1}}
-                        placeholder="Mot De Passe"
-                        onChangeText={(text) => { this.setState({mdp: text})} }
-                        keyboardType='numeric'
-                        maxLength={6}
-                        onBlur={()=>this.MdpValidation()}
-                        underlineColorAndroid="transparent"
-                        secureTextEntry={true}
-                        
-                    />
+            <TextInput style={[styles.input,
+        !this.state.passwordValidate? styles.error:null,
+        this.state.passwordValidate? styles.green:null
+      ]}
+        
+          placeholder="Mot De Passe"
+          onChangeText={(text)=>this.validate(text,'password')}
+          
+         />
           </View>
          
           <View style={{ flexDirection: 'row'}}>
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
 
     borderBottomWidth: 0.5,
-    borderColor: '#A7A8A9',
+    borderBottomColor: '#A7A8A9',
     height: 40,
     borderRadius: 5 ,
     margin:17,
@@ -146,17 +152,28 @@ const styles = StyleSheet.create({
     margin :20, 
     flexDirection: 'row' 
   },
-  LogoStyle:{
-    color: 'white', 
-    fontWeight: 'bold',
-    fontSize: 30
+  input: {
+    width: '90%',
+    padding: 10,
+    borderStyle: 'solid',
+    borderBottomWidth: 3,
+    borderBottomColor: 'transparent'
   },
-  LogoView:{
-    height:50, 
-    backgroundColor: '#49B7C1', 
-    alignItems: 'center',
-    justifyContent: 'center'
+  
+  green: {
+    borderBottomColor: 'green',
+    borderBottomWidth: 2,
+    height: 40,
+    borderRadius: 5 ,
+  },
+  error: {
+    borderBottomColor: 'red',
+    borderBottomWidth: 2,
+    height: 40,
+    borderRadius: 5 ,
+   
   }
+  
  
 
 

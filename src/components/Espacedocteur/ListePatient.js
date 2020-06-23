@@ -1,11 +1,11 @@
 import React from 'react'
 import { View,TouchableOpacity, TextInput,ScrollView, StyleSheet ,Image ,Button, Text, Linking, KeyboardAvoidingView} from 'react-native'
 import { Table, TableWrapper, Row } from 'react-native-table-component';
-
 class ListePatient extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+          width: 110,
           widthArr: [ 90,90,140,100],
           tableData: [
             ['Chafai', 'Rawia', 'rawiya@gmail.com', 'femme'],
@@ -42,6 +42,7 @@ class ListePatient extends React.Component {
   render() {
     
     const state = this.state;
+    const width = `${100 / parseInt(this.state.width / 400)}%`;
     
     return (
       <KeyboardAvoidingView behavior= 'padding'>
@@ -81,14 +82,24 @@ class ListePatient extends React.Component {
                     </TouchableOpacity>
                   ))
                 }
-             
+            
             </ScrollView>}
             </Table>
           </View>
+        
     </ScrollView>
     
 </KeyboardAvoidingView>
-                  )}}
+                  )}
+                  onLayout(e) {
+                    if (this.state.width !== e.nativeEvent.layout.width) {
+                      this.setState({
+                        width: e.nativeEvent.layout.width
+                      })
+                    }
+                  }   
+                
+                }
 
 export default ListePatient
 const styles = StyleSheet.create({
@@ -130,6 +141,41 @@ container:
   dataWrapper: { marginTop: -1 },
   row: { height: 80, backgroundColor: '#EAEAEA' },
   btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
-  btnText: { textAlign: 'center', color: '#fff' }
+  btnText: { textAlign: 'center', color: '#fff' },
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 80,
+    opacity: 0.5
+  },
+  box: {
+    width: 350,
+    height: 450,
+    backgroundColor: '#7AD5DE',
+    opacity: 0.5
+    
+  },
+  wrapper: {
+    marginVertical: 18, alignItems: 'center'
+  },
+  TextStyle:{
+    fontWeight: 'bold',
+    color:'#23818A',
+    left:44,
+    marginTop:8
+
+  },
+  ContinusStyle:{
+    
+    color:'#000606',
+    fontWeight: 'bold',
+    left:25,
+    margin: 14
+
+  }
 })
  
